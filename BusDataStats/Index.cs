@@ -22,7 +22,7 @@ namespace BusDataStats
         {
             var list =
             (from f in FileToList()
-                orderby f.LineCode, f.Direction, f.StationNum, f.StationCode, f.VehCode, f.EstimatedTime
+                orderby f.LineCode, f.Direction, f.StationNum, f.StationCode, f.VehCode, f.ProcessTime
                 select f).ToList();
             var srcList = new List<BusDataStats>();
             var temp = new List<BusData>();
@@ -38,14 +38,14 @@ namespace BusDataStats
                     }
                     var diff = (data.ProcessTime - last.ProcessTime).TotalMinutes;
                     diff = diff < 0 ? diff + 1440 : diff;
-                    if (diff > 1)
+                    if (diff > 30)
                         break;
                     temp.Add(data);
                 }
                 if (temp.Count > 1)
                 {
                     var first = temp.First();
-                    srcList.Add(new BusDataStats
+                    var stats = new BusDataStats
                     {
                         LineCode = first.LineCode,
                         Direction = first.Direction,
@@ -56,7 +56,9 @@ namespace BusDataStats
                         FirstProcessTime = first.ProcessTime,
                         LastEstimatedTime = temp.Last().EstimatedTime,
                         LastProcessTime = temp.Last().ProcessTime
-                    });
+                    };
+                    if (!(stats.TimeDiffMins < -30))
+                        srcList.Add(stats);
                 }
                 list = list.Skip(temp.Count).ToList();
                 temp.Clear();
