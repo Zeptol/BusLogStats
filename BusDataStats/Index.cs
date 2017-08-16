@@ -12,6 +12,7 @@ namespace BusDataStats
     public partial class Index : Form
     {
         private int _minDiff;
+
         public Index()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace BusDataStats
             (from f in FileToList()
                 orderby f.LineCode, f.Direction, f.StationNum, f.StationCode, f.VehCode, f.EstimatedTime
                 select f).ToList();
-            var srcList=new List<BusDataStats>();
+            var srcList = new List<BusDataStats>();
             var temp = new List<BusData>();
             while (list.Any())
             {
@@ -60,7 +61,7 @@ namespace BusDataStats
                 list = list.Skip(temp.Count).ToList();
                 temp.Clear();
             }
-            dataGridViewStats.DataSource = srcList.OrderBy(t=>t.TimeDiffMins).ToList();
+            dataGridViewStats.DataSource = srcList.OrderBy(t => t.TimeDiffMins).ToList();
             dataGridViewTotal.DataSource = (from t in srcList
                 group t by t.TimeDiffMins
                 into g
@@ -105,7 +106,7 @@ namespace BusDataStats
         private void dataGridViewMatrix_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
-            dataGridViewTotal.RowHeadersWidth+20, e.RowBounds.Height);
+                dataGridViewTotal.RowHeadersWidth + 20, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics,
                 string.Format("{0} ~ {1}", e.RowIndex * 2 + _minDiff, (e.RowIndex + 1) * 2 + _minDiff),
                 new Font("tahoma", 8, FontStyle.Regular), rectangle,
@@ -115,13 +116,14 @@ namespace BusDataStats
 
         private static List<BusData> FileToList()
         {
-            var res=new List<BusData>();
+            var res = new List<BusData>();
             var sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "data.txt", Encoding.UTF8);
             string line;
             while ((line = sr.ReadLine()) != null)
             {
                 var arr = line.Split('|');
-                if (!arr.Any() || arr.Length < 8 || string.IsNullOrWhiteSpace(arr[6]) || string.IsNullOrWhiteSpace(arr[7])) continue;
+                if (!arr.Any() || arr.Length < 8 || string.IsNullOrWhiteSpace(arr[6]) ||
+                    string.IsNullOrWhiteSpace(arr[7])) continue;
                 var data = new BusData
                 {
                     LineCode = arr[1],
