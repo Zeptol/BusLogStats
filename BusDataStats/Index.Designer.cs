@@ -35,6 +35,8 @@
             this.dataGridViewTotal = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridViewMatrix = new System.Windows.Forms.DataGridView();
+            this.btnChoose = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStats)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -57,7 +59,7 @@
             this.dataGridViewStats.Name = "dataGridViewStats";
             this.dataGridViewStats.ReadOnly = true;
             this.dataGridViewStats.RowTemplate.Height = 23;
-            this.dataGridViewStats.Size = new System.Drawing.Size(545, 339);
+            this.dataGridViewStats.Size = new System.Drawing.Size(530, 291);
             this.dataGridViewStats.TabIndex = 0;
             // 
             // tabControl1
@@ -71,7 +73,7 @@
             this.tabControl1.Location = new System.Drawing.Point(-2, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(553, 368);
+            this.tabControl1.Size = new System.Drawing.Size(538, 320);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -80,7 +82,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(545, 342);
+            this.tabPage1.Size = new System.Drawing.Size(530, 294);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "统计";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -91,7 +93,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(545, 342);
+            this.tabPage2.Size = new System.Drawing.Size(530, 294);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "总体统计";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -116,7 +118,7 @@
             this.tabPage3.Controls.Add(this.dataGridViewMatrix);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(545, 342);
+            this.tabPage3.Size = new System.Drawing.Size(530, 294);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "矩阵表";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -135,17 +137,37 @@
             this.dataGridViewMatrix.RowTemplate.Height = 23;
             this.dataGridViewMatrix.Size = new System.Drawing.Size(549, 339);
             this.dataGridViewMatrix.TabIndex = 0;
-            this.dataGridViewMatrix.RowPostPaint += dataGridViewMatrix_RowPostPaint;
+            // 
+            // btnChoose
+            // 
+            this.btnChoose.Location = new System.Drawing.Point(428, 322);
+            this.btnChoose.Name = "btnChoose";
+            this.btnChoose.Size = new System.Drawing.Size(93, 32);
+            this.btnChoose.TabIndex = 2;
+            this.btnChoose.Text = "选择文件";
+            this.btnChoose.UseVisualStyleBackColor = true;
+            this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(329, 322);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(93, 32);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "导出Excel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 359);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnChoose);
             this.Controls.Add(this.tabControl1);
             this.Name = "Index";
             this.Text = "BusDataStats";
-            this.Load += new System.EventHandler(this.Index_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStats)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -166,6 +188,8 @@
         private System.Windows.Forms.DataGridView dataGridViewTotal;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataGridViewMatrix;
+        private System.Windows.Forms.Button btnChoose;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 

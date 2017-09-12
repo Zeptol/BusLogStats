@@ -43,6 +43,14 @@ namespace BusDataStats
             }
         }
     }
+
+    public class ExcelData
+    {
+        public float Ratio { get; set; }
+        public int Total { get; set; }
+        public string FileName { get; set; }
+    }
+
     public enum Direction
     {
         Up,
