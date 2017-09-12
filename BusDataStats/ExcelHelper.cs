@@ -10,22 +10,19 @@ namespace BusDataStats
     {
         private static readonly IWorkbook Wb = new HSSFWorkbook();
 
-        private static readonly ICellStyle CellStyle = GetCellStyle(Wb, false, HorizontalAlignment.Center,
-            FillPattern.NoFill);
+        private static readonly ICellStyle CellStyle = GetCellStyle();
 
-        private static readonly ICellStyle BoldStyle = GetCellStyle(Wb, true, HorizontalAlignment.Center,
-            FillPattern.NoFill);
+        private static readonly ICellStyle BoldStyle = GetCellStyle(true);
 
-        private static readonly ICellStyle FilledStyle = GetCellStyle(Wb, false, HorizontalAlignment.Center,
+        private static readonly ICellStyle FilledStyle = GetCellStyle(false, HorizontalAlignment.Center,
             FillPattern.SolidForeground);
 
-        private static readonly ICellStyle LeftAlignStyle = GetCellStyle(Wb, false, HorizontalAlignment.Left,
-            FillPattern.NoFill);
+        private static readonly ICellStyle LeftAlignStyle = GetCellStyle(false, HorizontalAlignment.Left);
 
         public static void Export(DataTable dt, ExcelData data)
         {
             // create a new sheet
-            ISheet sheet = Wb.CreateSheet();
+            var sheet = Wb.CreateSheet();
             // declare a row object reference
             // declare a cell object reference
             ICell c;
@@ -88,7 +85,7 @@ namespace BusDataStats
 
         private static void InitHeader(ISheet sheet, int lastCol, ExcelData data)
         {
-            IRow r = sheet.CreateRow(0);
+            var r = sheet.CreateRow(0);
             ICell c;
             for (int i = 0; i <= lastCol; i++)
             {
@@ -132,10 +129,11 @@ namespace BusDataStats
             }
         }
 
-        private static ICellStyle GetCellStyle(IWorkbook wb, bool isBold, HorizontalAlignment hAlign,
-            FillPattern fillType)
+        private static ICellStyle GetCellStyle(bool isBold = false,
+            HorizontalAlignment hAlign = HorizontalAlignment.Center,
+            FillPattern fillType = FillPattern.NoFill)
         {
-            ICellStyle cellStyle = wb.CreateCellStyle();
+            var cellStyle = Wb.CreateCellStyle();
             cellStyle.Alignment = hAlign;
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.BorderTop = BorderStyle.Thin;
@@ -145,7 +143,7 @@ namespace BusDataStats
             cellStyle.FillForegroundColor = IndexedColors.Grey25Percent.Index;
             cellStyle.FillPattern = fillType;
             cellStyle.WrapText = true;
-            IFont f = wb.CreateFont();
+            var f = Wb.CreateFont();
             f.FontName = "宋体";
             f.FontHeightInPoints = 12;
             f.IsBold = isBold;
