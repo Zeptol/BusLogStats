@@ -115,7 +115,7 @@ namespace BusDataStats
                 temp.Clear();
             }
             timer.Stop();
-            MessageBox.Show(this, string.Format("统计耗时：{0:F3}秒", (float) timer.ElapsedMilliseconds / 1000), @"提示",
+            MessageBox.Show(this, $"统计耗时：{(float) timer.ElapsedMilliseconds / 1000:F3}秒", @"提示",
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             dataGridViewStats.DataSource = srcList.OrderBy(t => t.TimeDiffMins).ToList();
             var statsList = (from t in srcList
@@ -141,12 +141,12 @@ namespace BusDataStats
             dt.Columns.Add("次数");
             for (var i = 0; i < colCount; i++)
             {
-                dt.Columns.Add(string.Format("{0} ~ {1}", 2 * i, 2 * (i + 1)));
+                dt.Columns.Add($"{2 * i} ~ {2 * (i + 1)}");
             }
             for (var j = 0; j < rowCount; j++)
             {
                 var dr = dt.NewRow();
-                dr[0] = string.Format("{0} ~ {1}", j * 2 + minDiff, (j + 1) * 2 + minDiff);
+                dr[0] = $"{j * 2 + minDiff} ~ {(j + 1) * 2 + minDiff}";
                 for (var i = 0; i < colCount; i++)
                 {
                     dr[i + 1] =
