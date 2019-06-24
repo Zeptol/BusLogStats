@@ -115,7 +115,7 @@ namespace BusDataStats
                 temp.Clear();
             }
             timer.Stop();
-            MessageBox.Show(this, $"统计耗时：{(float) timer.ElapsedMilliseconds / 1000:F3}秒", @"提示",
+            MessageBox.Show(this, $@"统计耗时：{(float) timer.ElapsedMilliseconds / 1000:F3}秒", @"提示",
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             dataGridViewStats.DataSource = srcList.OrderBy(t => t.TimeDiffMins).ToList();
             var statsList = (from t in srcList
